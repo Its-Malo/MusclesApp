@@ -1,17 +1,29 @@
 import React from 'react';
-import { View, StyleSheet, TextInput } from 'react-native';
+import { useState, useEffect } from 'react';
+import { View, StyleSheet, TextInput, FlatList } from 'react-native';
 import filter from 'lodash.filter';
-
+import data from '../exercices.json'
 
 
 export default function SearchBar() {
-    const [searchQuery, setSearchQuery] = useState("");
+    const [searchQuery, setSearchQuery] = useState('');
+    const [fullData, setFullData] = useState(data);
+    const [filteredData, setFilteredData] = useState(data);
 
     const handleSearch = (query) => {
     setSearchQuery(query);
     const formattedQuery = query.toLowerCase();
-    const filteredData = filter(fullData)
-}
+    const filtered = filter(fullData, (exercise) => contains(exercise, formattedQuery));
+    setFilteredData(filtered);
+    };
+
+    const contains = ({name, muscleGroup}, query) => {
+        if (name.toLowerCase().includes(query) || muscleGroup.toLowerCase().includes(query)){
+            return true;
+        }
+        return false;
+    }
+
     return (
     <View style={styles.container}>
         <TextInput
