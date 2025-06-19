@@ -1,39 +1,74 @@
 import React from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
+import {View, ScrollView, StyleSheet, TouchableOpacity, Text} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import ExerciseCard from '../components/ExerciseCard';
 import SearchBar from '../components/SearchBar';
 
 const exercises = require('../exercices.json');
 
 const HomeScreen = () => {
-  return (
-    <View style={styles.container}>
+	const navigation = useNavigation();
+
+	return (
+		<View style={styles.container}>
       <SearchBar />
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
-        {exercises.map((exercise) => (
-          <ExerciseCard
-            key={exercise.id}
-            name={exercise.name}
-            muscleGroup={exercise.muscleGroup}
-            maloPR={exercise.maloPR}
-            orionPR={exercise.orionPR}
-          />
-        ))}
-      </ScrollView>
-    </View>
-  );
+			<ScrollView contentContainerStyle={styles.scrollContainer}>
+				{exercises.map((exercise) => (
+					<TouchableOpacity
+						key={exercise.id}
+						onPress={() =>
+							navigation.navigate('Details')
+						}
+					>
+						<ExerciseCard
+							name={exercise.name}
+							muscleGroup={exercise.muscleGroup}
+							maloPR={exercise.maloPR}
+							orionPR={exercise.orionPR}
+						/>
+					</TouchableOpacity>
+				))}
+			</ScrollView>
+			<TouchableOpacity style={styles.floatingButton} onPress={() => navigation.navigate('Creation')}>
+				<Text style={styles.text}>+</Text>
+			</TouchableOpacity>
+		</View>
+	);
 };
 
 export default HomeScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    paddingTop: 50,
-  },
-  scrollContainer: {
-    paddingHorizontal: 16,
-    paddingBottom: 16,
-  },
+	container: {
+		flex: 1,
+		backgroundColor: '#fff',
+		paddingTop: 50,
+	},
+	scrollContainer: {
+		paddingHorizontal: 16,
+		paddingBottom: 16,
+	},
+	floatingButton: {
+		position: 'absolute',
+		bottom: 20,
+		right: 20,
+		width: 80,
+		height: 80,
+		backgroundColor: '#025cc1',
+		borderRadius: 45,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	text: {
+		position: 'absolute',
+		bottom: 14,
+		right: 23,
+		color: '#fff',
+		fontSize: 48,
+		justifyContent: 'center',
+		alignItems: 'center',
+		fontWeight: 'bold',
+		textAlign: 'center',
+		textAlignVertical: 'center',
+	},
 });
