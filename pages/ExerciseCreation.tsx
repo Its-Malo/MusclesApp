@@ -1,15 +1,17 @@
 import React from 'react';
 import {View, StyleSheet, Text} from 'react-native';
 
-const ExerciseDetails = () => {
+const ExerciseCreation = () => {
+	//const navigation = useNavigation();
+
 	return (
 		<View style={styles.container}>
-			<Text>Exercise Details</Text>
+			<Text>Exercise Creation</Text>
 		</View>
 	);
 };
 
-export default ExerciseDetails;
+export default ExerciseCreation;
 
 const styles = StyleSheet.create({
 	container: {
