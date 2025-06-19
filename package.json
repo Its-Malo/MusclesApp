@@ -16,15 +16,13 @@
     "lodash.filter": "^4.6.0",
     "react": "19.0.0",
     "react-native": "0.79.3",
-    "react-native-safe-area-context": "^5.4.1",
-    "lodash.filter": "^4.6.0"
+    "react-native-safe-area-context": "^5.4.1"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@types/lodash.filter": "^4.6.9",
     "@types/react": "~19.0.10",
-    "typescript": "~5.8.3",
-    "@types/lodash.filter": "^4.6.9"
+    "typescript": "~5.8.3"
   },
   "private": true
 }

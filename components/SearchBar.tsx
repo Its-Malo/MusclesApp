@@ -4,20 +4,24 @@ import { View, StyleSheet, TextInput, FlatList } from 'react-native';
 import filter from 'lodash.filter';
 import data from '../exercices.json'
 
+type Props = {
+	name: string;
+	muscleGroup: string;
+};
 
 export default function SearchBar() {
     const [searchQuery, setSearchQuery] = useState('');
     const [fullData, setFullData] = useState(data);
     const [filteredData, setFilteredData] = useState(data);
 
-    const handleSearch = (query) => {
+    const handleSearch = (query: string) => {
     setSearchQuery(query);
     const formattedQuery = query.toLowerCase();
     const filtered = filter(fullData, (exercise) => contains(exercise, formattedQuery));
     setFilteredData(filtered);
     };
 
-    const contains = ({name, muscleGroup}, query) => {
+    const contains = ({name, muscleGroup} : Props, query: string) => {
         if (name.toLowerCase().includes(query) || muscleGroup.toLowerCase().includes(query)){
             return true;
         }

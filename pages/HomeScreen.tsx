@@ -4,6 +4,14 @@ import {useNavigation} from '@react-navigation/native';
 import ExerciseCard from '../components/ExerciseCard';
 import SearchBar from '../components/SearchBar';
 
+type Props = {
+  id: React.Key;
+	name: string;
+	muscleGroup: string;
+	maloPR?: number | null;
+	orionPR?: number | null;
+};
+
 const exercises = require('../exercices.json');
 
 const HomeScreen = () => {
@@ -13,18 +21,18 @@ const HomeScreen = () => {
 		<View style={styles.container}>
       <SearchBar />
 			<ScrollView contentContainerStyle={styles.scrollContainer}>
-				{exercises.map((exercise) => (
+				{exercises.map(({id, name, muscleGroup, maloPR, orionPR} : Props) => (
 					<TouchableOpacity
-						key={exercise.id}
+						key={id}
 						onPress={() =>
 							navigation.navigate('Details')
 						}
 					>
 						<ExerciseCard
-							name={exercise.name}
-							muscleGroup={exercise.muscleGroup}
-							maloPR={exercise.maloPR}
-							orionPR={exercise.orionPR}
+							name={name}
+							muscleGroup={muscleGroup}
+							maloPR={maloPR}
+							orionPR={orionPR}
 						/>
 					</TouchableOpacity>
 				))}
