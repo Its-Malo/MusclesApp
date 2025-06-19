@@ -5,7 +5,7 @@ import ExerciseCard from '../components/ExerciseCard';
 import SearchBar from '../components/SearchBar';
 
 type Props = {
-  id: React.Key;
+	id: React.Key;
 	name: string;
 	muscleGroup: string;
 	maloPR?: number | null;
@@ -19,9 +19,9 @@ const HomeScreen = () => {
 
 	return (
 		<View style={styles.container}>
-      <SearchBar />
+			<SearchBar/>
 			<ScrollView contentContainerStyle={styles.scrollContainer}>
-				{exercises.map(({id, name, muscleGroup, maloPR, orionPR} : Props) => (
+				{exercises.map(({id, name, muscleGroup, maloPR, orionPR}: Props) => (
 					<TouchableOpacity
 						key={id}
 						onPress={() =>

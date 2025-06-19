@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 
 type Props = {
 	name: string;
@@ -8,7 +8,7 @@ type Props = {
 	orionPR?: number | null;
 };
 
-const ExerciseCard = ({ name, muscleGroup, maloPR, orionPR }: Props) => {
+const ExerciseCard = ({name, muscleGroup, maloPR, orionPR}: Props) => {
 	return (
 		<View style={styles.card}>
 			<Text style={styles.name}>{name}</Text>
