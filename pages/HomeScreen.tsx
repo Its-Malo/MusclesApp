@@ -4,8 +4,7 @@ import {View, ScrollView, StyleSheet, TouchableOpacity, Text} from 'react-native
 import {useNavigation} from '@react-navigation/native';
 import ExerciseCard from '../components/ExerciseCard';
 import SearchBar from '../components/SearchBar';
-
-const data = require('../exercices.json');
+import data from '../exercices.json';
 
 type Props = {
   id: React.Key;
@@ -27,7 +26,7 @@ const HomeScreen = () => {
 					<TouchableOpacity
 						key={id}
 						onPress={() =>
-							navigation.navigate('Details')
+							navigation.navigate('Details' as never)
 						}
 					>
 						<ExerciseCard
@@ -39,7 +38,7 @@ const HomeScreen = () => {
 					</TouchableOpacity>
 				))}
 			</ScrollView>
-			<TouchableOpacity style={styles.floatingButton} onPress={() => navigation.navigate('Creation')}>
+			<TouchableOpacity style={styles.floatingButton} onPress={() => navigation.navigate('Creation' as never)}>
 				<Text style={styles.text}>+</Text>
 			</TouchableOpacity>
 		</View>
