@@ -1,31 +1,35 @@
 import React from 'react';
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import {View, StyleSheet, TextInput, FlatList} from 'react-native';
 import filter from 'lodash.filter';
-import data from '../exercices.json'
 
 type Props = {
-	name: string;
-	muscleGroup: string;
-};
+    id: React.Key;
+      name: string;
+      muscleGroup: string;
+      maloPR?: number | null;
+      orionPR?: number | null;
+  };
 
-export default function SearchBar() {
+type SearchBarProps = {
+    data: Props[];
+    onFiltered: (filtered: Props[]) => void;
+};  
+
+export default function SearchBar({ data, onFiltered }: SearchBarProps) {
 	const [searchQuery, setSearchQuery] = useState('');
-	const [fullData, setFullData] = useState(data);
-	const [filteredData, setFilteredData] = useState(data);
 
 	const handleSearch = (query: string) => {
 		setSearchQuery(query);
 		const formattedQuery = query.toLowerCase();
-		const filtered = filter(fullData, (exercise) => contains(exercise, formattedQuery));
-		setFilteredData(filtered);
+		const filtered = filter(data, (exercise) => contains(exercise, formattedQuery));
+		onFiltered(filtered);
 	};
 
 	const contains = ({name, muscleGroup}: Props, query: string) => {
-		if (name.toLowerCase().includes(query) || muscleGroup.toLowerCase().includes(query)) {
-			return true;
-		}
-		return false;
+        return (
+            name.toLowerCase().includes(query) || muscleGroup.toLowerCase().includes(query)
+        );
 	}
 
 	return (
@@ -37,7 +41,7 @@ export default function SearchBar() {
 				autoCapitalize='none'
 				autoCorrect={false}
 				value={searchQuery}
-				onChangeText={(query) => handleSearch(query)}
+				onChangeText={handleSearch}
 			/>
 		</View>
 	)

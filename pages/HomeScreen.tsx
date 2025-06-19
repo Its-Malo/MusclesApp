@@ -1,27 +1,29 @@
 import React from 'react';
+import { useState } from 'react';
 import {View, ScrollView, StyleSheet, TouchableOpacity, Text} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import ExerciseCard from '../components/ExerciseCard';
 import SearchBar from '../components/SearchBar';
 
+const data = require('../exercices.json');
+
 type Props = {
-	id: React.Key;
+  id: React.Key;
 	name: string;
 	muscleGroup: string;
 	maloPR?: number | null;
 	orionPR?: number | null;
 };
 
-const exercises = require('../exercices.json');
-
 const HomeScreen = () => {
 	const navigation = useNavigation();
+  const [filteredExercises, setFilteredExercises] = useState<Props[]>(data);
 
 	return (
 		<View style={styles.container}>
-			<SearchBar/>
+      <SearchBar data={data} onFiltered={setFilteredExercises} />
 			<ScrollView contentContainerStyle={styles.scrollContainer}>
-				{exercises.map(({id, name, muscleGroup, maloPR, orionPR}: Props) => (
+      {filteredExercises.map(({ id, name, muscleGroup, maloPR, orionPR }: Props) => (
 					<TouchableOpacity
 						key={id}
 						onPress={() =>
