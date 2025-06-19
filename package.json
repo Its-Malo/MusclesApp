@@ -5,10 +5,12 @@
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
-    "ios": "expo start --ios",
+    "ios": "xcrun simctl boot 1998AEDA-1E2B-4923-A8AA-41A48B83B55A ; open -a Simulator ; expo start --ios",
     "web": "expo start --web"
   },
   "dependencies": {
+    "@react-navigation/native": "^7.1.13",
+    "@react-navigation/stack": "^7.3.6",
     "expo": "~53.0.11",
     "expo-status-bar": "~2.2.3",
     "react": "19.0.0",
